@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — BusinessHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen flex">
+
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar w-64 flex-shrink-0 flex flex-col py-5 px-4">
+  <div class="flex items-center justify-between mb-8 px-1">
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">B</div>
+      <span class="text-white font-semibold text-lg">BusinessHub</span>
+    </div>
+    <button id="sidebarClose" class="lg:hidden text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a href="index.html" data-page="index.html" class="nav-link"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+    <a href="customers.html" data-page="customers.html" class="nav-link"><i class="fa-solid fa-users"></i>Customers</a>
+    <a href="products.html" data-page="products.html" class="nav-link"><i class="fa-solid fa-box"></i>Products</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i>Reports</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
+  </nav>
+  <div class="mt-auto pt-5 border-t border-slate-700/50">
+    <div class="nav-link cursor-pointer"><i class="fa-solid fa-right-from-bracket"></i>Log out</div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="flex-1 flex flex-col min-w-0">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <button id="menuToggle" class="lg:hidden text-slate-600"><i class="fa-solid fa-bars text-lg"></i></button>
+      <h1 class="font-semibold text-slate-800 text-lg hidden sm:block">Dashboard</h1>
+    </div>
+    <div class="flex-1 max-w-md hidden md:block">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" placeholder="Search..." class="input-field pl-9">
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <button data-dropdown-toggle="notifMenu" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-slate-600 relative">
+          <i class="fa-regular fa-bell"></i>
+          <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+        </button>
+        <div id="notifMenu" class="dropdown-menu w-72 p-2">
+          <div class="px-3 py-2 text-xs font-semibold text-slate-500">Notifications</div>
+          <div class="px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">New order #INV-1042 received</div>
+          <div class="px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">Product "Rice 5kg" low on stock</div>
+          <div class="px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">Ali Raza's payment cleared</div>
+        </div>
+      </div>
+      <div class="relative">
+        <button data-dropdown-toggle="profileMenu" class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">AK</div>
+          <span class="hidden sm:block text-sm font-medium text-slate-700">Ahmed Khan</span>
+          <i class="fa-solid fa-chevron-down text-xs text-slate-400 hidden sm:block"></i>
+        </button>
+        <div id="profileMenu" class="dropdown-menu w-44 p-2">
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">My Profile</a>
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">Settings</a>
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-red-600">Log out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+
+    <!-- Quick actions -->
+    <div class="flex flex-wrap gap-3">
+      <button class="btn-primary"><i class="fa-solid fa-user-plus"></i>Add Customer</button>
+      <button class="btn-secondary"><i class="fa-solid fa-box-open"></i>Add Product</button>
+      <button class="btn-secondary"><i class="fa-solid fa-cart-plus"></i>Create Order</button>
+    </div>
+
+    <!-- KPI cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+      <div class="card p-5 flex items-start justify-between">
+        <div>
+          <p class="text-xs text-slate-500 font-medium">Total Sales</p>
+          <p class="text-2xl font-bold text-slate-800 mt-1">₨1,245,800</p>
+          <p class="text-xs text-emerald-600 font-medium mt-1"><i class="fa-solid fa-arrow-up"></i> 12.4% this month</p>
+        </div>
+        <div class="kpi-icon bg-blue-50 text-blue-600"><i class="fa-solid fa-sack-dollar"></i></div>
+      </div>
+      <div class="card p-5 flex items-start justify-between">
+        <div>
+          <p class="text-xs text-slate-500 font-medium">Customers</p>
+          <p class="text-2xl font-bold text-slate-800 mt-1">386</p>
+          <p class="text-xs text-emerald-600 font-medium mt-1"><i class="fa-solid fa-arrow-up"></i> 8 new this week</p>
+        </div>
+        <div class="kpi-icon bg-emerald-50 text-emerald-600"><i class="fa-solid fa-users"></i></div>
+      </div>
+      <div class="card p-5 flex items-start justify-between">
+        <div>
+          <p class="text-xs text-slate-500 font-medium">Products</p>
+          <p class="text-2xl font-bold text-slate-800 mt-1">214</p>
+          <p class="text-xs text-amber-600 font-medium mt-1"><i class="fa-solid fa-triangle-exclamation"></i> 6 low stock</p>
+        </div>
+        <div class="kpi-icon bg-amber-50 text-amber-600"><i class="fa-solid fa-box"></i></div>
+      </div>
+      <div class="card p-5 flex items-start justify-between">
+        <div>
+          <p class="text-xs text-slate-500 font-medium">Pending Orders</p>
+          <p class="text-2xl font-bold text-slate-800 mt-1">27</p>
+          <p class="text-xs text-slate-500 font-medium mt-1">Awaiting fulfillment</p>
+        </div>
+        <div class="kpi-icon bg-pink-50 text-pink-600"><i class="fa-solid fa-clock"></i></div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <div class="card p-5 xl:col-span-2">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="font-semibold text-slate-800">Sales Overview</h2>
+          <span class="text-xs text-slate-400">Last 7 days</span>
+        </div>
+        <div class="h-64"><canvas id="salesChart"></canvas></div>
+      </div>
+      <div class="card p-5">
+        <h2 class="font-semibold text-slate-800 mb-4">Sales by Category</h2>
+        <div class="h-64"><canvas id="categoryChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- Transactions + Activity -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
+      <div class="card p-5 xl:col-span-2">
+        <h2 class="font-semibold text-slate-800 mb-4">Recent Transactions</h2>
+        <div class="table-scroll">
+          <table class="w-full text-sm">
+            <thead><tr>
+              <th class="text-left py-2 pr-4">Invoice</th>
+              <th class="text-left py-2 pr-4">Customer</th>
+              <th class="text-left py-2 pr-4">Date</th>
+              <th class="text-left py-2 pr-4">Amount</th>
+              <th class="text-left py-2">Status</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="py-3 pr-4 font-medium text-slate-700">INV-1042</td><td class="py-3 pr-4">Ahmed Khan</td><td class="py-3 pr-4 text-slate-500">Sep 2, 2026</td><td class="py-3 pr-4 font-medium">₨45,500</td><td class="py-3"><span class="badge badge-green"><span class="badge-dot"></span>Paid</span></td></tr>
+              <tr><td class="py-3 pr-4 font-medium text-slate-700">INV-1041</td><td class="py-3 pr-4">Ali Raza</td><td class="py-3 pr-4 text-slate-500">Sep 2, 2026</td><td class="py-3 pr-4 font-medium">₨125,800</td><td class="py-3"><span class="badge badge-yellow"><span class="badge-dot"></span>Pending</span></td></tr>
+              <tr><td class="py-3 pr-4 font-medium text-slate-700">INV-1040</td><td class="py-3 pr-4">Hamza Ahmed</td><td class="py-3 pr-4 text-slate-500">Sep 1, 2026</td><td class="py-3 pr-4 font-medium">₨18,200</td><td class="py-3"><span class="badge badge-green"><span class="badge-dot"></span>Paid</span></td></tr>
+              <tr><td class="py-3 pr-4 font-medium text-slate-700">INV-1039</td><td class="py-3 pr-4">Usman Malik</td><td class="py-3 pr-4 text-slate-500">Sep 1, 2026</td><td class="py-3 pr-4 font-medium">₨76,000</td><td class="py-3"><span class="badge badge-red"><span class="badge-dot"></span>Overdue</span></td></tr>
+              <tr><td class="py-3 pr-4 font-medium text-slate-700">INV-1038</td><td class="py-3 pr-4">Sana Tariq</td><td class="py-3 pr-4 text-slate-500">Aug 31, 2026</td><td class="py-3 pr-4 font-medium">₨32,900</td><td class="py-3"><span class="badge badge-green"><span class="badge-dot"></span>Paid</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card p-5">
+        <h2 class="font-semibold text-slate-800 mb-4">Recent Activity</h2>
+        <ul class="space-y-4 text-sm">
+          <li class="flex gap-3"><div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-cart-shopping text-xs"></i></div><div><p class="text-slate-700">New order placed by <span class="font-medium">Ahmed Khan</span></p><p class="text-xs text-slate-400">10 minutes ago</p></div></li>
+          <li class="flex gap-3"><div class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-user-plus text-xs"></i></div><div><p class="text-slate-700"><span class="font-medium">Sana Tariq</span> added as new customer</p><p class="text-xs text-slate-400">1 hour ago</p></div></li>
+          <li class="flex gap-3"><div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-triangle-exclamation text-xs"></i></div><div><p class="text-slate-700">Stock low for <span class="font-medium">Rice 5kg</span></p><p class="text-xs text-slate-400">3 hours ago</p></div></li>
+          <li class="flex gap-3"><div class="w-8 h-8 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0"><i class="fa-solid fa-file-invoice text-xs"></i></div><div><p class="text-slate-700">Invoice INV-1040 marked as paid</p><p class="text-xs text-slate-400">Yesterday</p></div></li>
+        </ul>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — BusinessHub</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="min-h-screen flex">
+
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar w-64 flex-shrink-0 flex flex-col py-5 px-4">
+  <div class="flex items-center justify-between mb-8 px-1">
+    <div class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">B</div>
+      <span class="text-white font-semibold text-lg">BusinessHub</span>
+    </div>
+    <button id="sidebarClose" class="lg:hidden text-slate-400"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="flex flex-col gap-1">
+    <a href="index.html" data-page="index.html" class="nav-link"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+    <a href="customers.html" data-page="customers.html" class="nav-link"><i class="fa-solid fa-users"></i>Customers</a>
+    <a href="products.html" data-page="products.html" class="nav-link"><i class="fa-solid fa-box"></i>Products</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i>Reports</a>
+    <a href="#" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
+  </nav>
+  <div class="mt-auto pt-5 border-t border-slate-700/50">
+    <div class="nav-link cursor-pointer"><i class="fa-solid fa-right-from-bracket"></i>Log out</div>
+  </div>
+</aside>
+
+<!-- Main -->
+<div class="flex-1 flex flex-col min-w-0">
+
+  <!-- Header -->
+  <header class="bg-white border-b border-gray-200 px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3 min-w-0">
+      <button id="menuToggle" class="lg:hidden text-slate-600"><i class="fa-solid fa-bars text-lg"></i></button>
+      <h1 class="font-semibold text-slate-800 text-lg hidden sm:block">Products</h1>
+    </div>
+    <div class="flex-1 max-w-md hidden md:block">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" placeholder="Search..." class="input-field pl-9">
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="relative">
+        <button data-dropdown-toggle="notifMenu" class="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-slate-600 relative">
+          <i class="fa-regular fa-bell"></i>
+          <span class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-white"></span>
+        </button>
+        <div id="notifMenu" class="dropdown-menu w-72 p-2">
+          <div class="px-3 py-2 text-xs font-semibold text-slate-500">Notifications</div>
+          <div class="px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">Product "Rice 5kg" low on stock</div>
+          <div class="px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">New order #INV-1042 received</div>
+        </div>
+      </div>
+      <div class="relative">
+        <button data-dropdown-toggle="profileMenu" class="flex items-center gap-2">
+          <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">AK</div>
+          <span class="hidden sm:block text-sm font-medium text-slate-700">Ahmed Khan</span>
+          <i class="fa-solid fa-chevron-down text-xs text-slate-400 hidden sm:block"></i>
+        </button>
+        <div id="profileMenu" class="dropdown-menu w-44 p-2">
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">My Profile</a>
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-slate-700">Settings</a>
+          <a href="#" class="block px-3 py-2 rounded-lg hover:bg-gray-50 text-sm text-red-600">Log out</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-5">
+
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <h2 class="text-xl font-bold text-slate-800">Products</h2>
+      <button data-modal-open="addProductModal" class="btn-primary"><i class="fa-solid fa-box-open"></i>Add Product</button>
+    </div>
+
+    <div class="card p-4 flex flex-col sm:flex-row gap-3">
+      <div class="relative flex-1">
+        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input id="productSearch" type="text" placeholder="Search products..." class="input-field pl-9">
+      </div>
+      <select class="input-field sm:w-44"><option>All Categories</option><option>Groceries</option><option>Electronics</option><option>Apparel</option><option>Pharmacy</option></select>
+      <select class="input-field sm:w-40"><option>All Stock</option><option>In Stock</option><option>Low Stock</option><option>Out of Stock</option></select>
+    </div>
+
+    <div class="card p-4">
+      <div class="table-scroll">
+        <table class="w-full text-sm min-w-[760px]">
+          <thead><tr>
+            <th class="text-left py-2 pr-4">Product</th>
+            <th class="text-left py-2 pr-4">SKU</th>
+            <th class="text-left py-2 pr-4">Category</th>
+            <th class="text-left py-2 pr-4">Price</th>
+            <th class="text-left py-2 pr-4">Stock</th>
+            <th class="text-left py-2 pr-4">Status</th>
+            <th class="text-left py-2">Actions</th>
+          </tr></thead>
+          <tbody id="productTableBody">
+            <tr>
+              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-wheat-awn text-xs"></i></div><span class="font-medium text-slate-700">Rice 5kg</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-1042</td>
+              <td class="py-3 pr-4">Groceries</td>
+              <td class="py-3 pr-4 font-medium">₨1,450</td>
+              <td class="py-3 pr-4">8</td>
+              <td class="py-3 pr-4"><span class="badge badge-yellow"><span class="badge-dot"></span>Low Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-mobile-screen text-xs"></i></div><span class="font-medium text-slate-700">Wireless Earbuds</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-2087</td>
+              <td class="py-3 pr-4">Electronics</td>
+              <td class="py-3 pr-4 font-medium">₨5,999</td>
+              <td class="py-3 pr-4">42</td>
+              <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-shirt text-xs"></i></div><span class="font-medium text-slate-700">Cotton Kurta</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-3311</td>
+              <td class="py-3 pr-4">Apparel</td>
+              <td class="py-3 pr-4 font-medium">₨2,200</td>
+              <td class="py-3 pr-4">0</td>
+              <td class="py-3 pr-4"><span class="badge badge-red"><span class="badge-dot"></span>Out of Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-pills text-xs"></i></div><span class="font-medium text-slate-700">Panadol 20s</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-4456</td>
+              <td class="py-3 pr-4">Pharmacy</td>
+              <td class="py-3 pr-4 font-medium">₨180</td>
+              <td class="py-3 pr-4">156</td>
+              <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-mug-hot text-xs"></i></div><span class="font-medium text-slate-700">Tea Pack 900g</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-5521</td>
+              <td class="py-3 pr-4">Groceries</td>
+              <td class="py-3 pr-4 font-medium">₨890</td>
+              <td class="py-3 pr-4">27</td>
+              <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Add Product Modal -->
+<div id="addProductModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+      <h3 class="font-semibold text-slate-800">Add Product</h3>
+      <button data-modal-close class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <form class="px-6 py-5 space-y-4" onsubmit="event.preventDefault(); this.closest('.modal-overlay').classList.remove('open'); this.reset();">
+      <div>
+        <label class="text-xs font-medium text-slate-600 mb-1 block">Product Name</label>
+        <input type="text" placeholder="e.g. Cooking Oil 1L" class="input-field" required>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="text-xs font-medium text-slate-600 mb-1 block">SKU</label>
+          <input type="text" placeholder="SKU-0000" class="input-field" required>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-slate-600 mb-1 block">Category</label>
+          <select class="input-field"><option>Groceries</option><option>Electronics</option><option>Apparel</option><option>Pharmacy</option><option>Other</option></select>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 gap-4">
+        <div>
+          <label class="text-xs font-medium text-slate-600 mb-1 block">Price (PKR)</label>
+          <input type="number" placeholder="0" class="input-field" required>
+        </div>
+        <div>
+          <label class="text-xs font-medium text-slate-600 mb-1 block">Quantity</label>
+          <input type="number" placeholder="0" class="input-field">
+        </div>
+        <div>
+          <label class="text-xs font-medium text-slate-600 mb-1 block">Min Stock</label>
+          <input type="number" placeholder="0" class="input-field">
+        </div>
+      </div>
+      <div>
+        <label class="text-xs font-medium text-slate-600 mb-1 block">Description</label>
+        <textarea rows="3" placeholder="Short product description..." class="input-field"></textarea>
+      </div>
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" data-modal-close class="btn-secondary">Cancel</button>
+        <button type="submit" class="btn-primary"><i class="fa-solid fa-check"></i>Save Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>
