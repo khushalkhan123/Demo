@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Products — BusinessHub</title>
+<title>Products — ZamZam Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -17,8 +17,8 @@
 <aside id="sidebar" class="sidebar w-64 flex-shrink-0 flex flex-col py-5 px-4">
   <div class="flex items-center justify-between mb-8 px-1">
     <div class="flex items-center gap-2">
-      <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">B</div>
-      <span class="text-white font-semibold text-lg">BusinessHub</span>
+      <div class="store-logo"><i class="fa-solid fa-wheat-awn"></i></div>
+      <span class="text-white font-semibold text-lg">ZamZam Store</span>
     </div>
     <button id="sidebarClose" class="lg:hidden text-slate-400"><i class="fa-solid fa-xmark"></i></button>
   </div>
@@ -26,6 +26,7 @@
     <a href="index.html" data-page="index.html" class="nav-link"><i class="fa-solid fa-gauge"></i>Dashboard</a>
     <a href="customers.html" data-page="customers.html" class="nav-link"><i class="fa-solid fa-users"></i>Customers</a>
     <a href="products.html" data-page="products.html" class="nav-link"><i class="fa-solid fa-box"></i>Products</a>
+    <a href="transactions.html" data-page="transactions.html" class="nav-link"><i class="fa-solid fa-receipt"></i>Transactions</a>
     <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i>Reports</a>
     <a href="#" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
   </nav>
@@ -64,7 +65,7 @@
       <div class="relative">
         <button data-dropdown-toggle="profileMenu" class="flex items-center gap-2">
           <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">AK</div>
-          <span class="hidden sm:block text-sm font-medium text-slate-700">Ahmed Khan</span>
+          <span class="hidden sm:block text-sm font-medium text-slate-700">Arham Khan</span>
           <i class="fa-solid fa-chevron-down text-xs text-slate-400 hidden sm:block"></i>
         </button>
         <div id="profileMenu" class="dropdown-menu w-44 p-2">
@@ -106,47 +107,47 @@
           </tr></thead>
           <tbody id="productTableBody">
             <tr>
-              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-wheat-awn text-xs"></i></div><span class="font-medium text-slate-700">Rice 5kg</span></div></td>
+              <td data-unit="kg" class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-wheat-awn text-xs"></i></div><span class="font-medium text-slate-700">Rice</span></div></td>
               <td class="py-3 pr-4 text-slate-500">SKU-1042</td>
               <td class="py-3 pr-4">Groceries</td>
-              <td class="py-3 pr-4 font-medium">₨1,450</td>
-              <td class="py-3 pr-4">8</td>
+              <td class="py-3 pr-4 font-medium">₨290 / kg</td>
+              <td class="py-3 pr-4">25 kg</td>
               <td class="py-3 pr-4"><span class="badge badge-yellow"><span class="badge-dot"></span>Low Stock</span></td>
               <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
             </tr>
             <tr>
-              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center"><i class="fa-solid fa-mobile-screen text-xs"></i></div><span class="font-medium text-slate-700">Wireless Earbuds</span></div></td>
+              <td data-unit="L" class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-bottle-droplet text-xs"></i></div><span class="font-medium text-slate-700">Cooking Oil</span></div></td>
               <td class="py-3 pr-4 text-slate-500">SKU-2087</td>
-              <td class="py-3 pr-4">Electronics</td>
-              <td class="py-3 pr-4 font-medium">₨5,999</td>
-              <td class="py-3 pr-4">42</td>
+              <td class="py-3 pr-4">Groceries</td>
+              <td class="py-3 pr-4 font-medium">₨560 / L</td>
+              <td class="py-3 pr-4">18 L</td>
               <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
               <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
             </tr>
             <tr>
-              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-pink-50 text-pink-600 flex items-center justify-center"><i class="fa-solid fa-shirt text-xs"></i></div><span class="font-medium text-slate-700">Cotton Kurta</span></div></td>
+              <td data-unit="pcs" class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center"><i class="fa-solid fa-cookie-bite text-xs"></i></div><span class="font-medium text-slate-700">Biscuits</span></div></td>
               <td class="py-3 pr-4 text-slate-500">SKU-3311</td>
-              <td class="py-3 pr-4">Apparel</td>
-              <td class="py-3 pr-4 font-medium">₨2,200</td>
-              <td class="py-3 pr-4">0</td>
-              <td class="py-3 pr-4"><span class="badge badge-red"><span class="badge-dot"></span>Out of Stock</span></td>
-              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
-            </tr>
-            <tr>
-              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center"><i class="fa-solid fa-pills text-xs"></i></div><span class="font-medium text-slate-700">Panadol 20s</span></div></td>
-              <td class="py-3 pr-4 text-slate-500">SKU-4456</td>
-              <td class="py-3 pr-4">Pharmacy</td>
-              <td class="py-3 pr-4 font-medium">₨180</td>
-              <td class="py-3 pr-4">156</td>
+              <td class="py-3 pr-4">Groceries</td>
+              <td class="py-3 pr-4 font-medium">₨80 / pcs</td>
+              <td class="py-3 pr-4">120 pcs</td>
               <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
               <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
             </tr>
             <tr>
-              <td class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-mug-hot text-xs"></i></div><span class="font-medium text-slate-700">Tea Pack 900g</span></div></td>
+              <td data-unit="pcs" class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-red-50 text-red-600 flex items-center justify-center"><i class="fa-solid fa-jar text-xs"></i></div><span class="font-medium text-slate-700">Ketchup</span></div></td>
+              <td class="py-3 pr-4 text-slate-500">SKU-4456</td>
+              <td class="py-3 pr-4">Groceries</td>
+              <td class="py-3 pr-4 font-medium">₨320 / pcs</td>
+              <td class="py-3 pr-4">24 pcs</td>
+              <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
+              <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td data-unit="pack" class="py-3 pr-4"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center"><i class="fa-solid fa-mug-hot text-xs"></i></div><span class="font-medium text-slate-700">Tea Pack</span></div></td>
               <td class="py-3 pr-4 text-slate-500">SKU-5521</td>
               <td class="py-3 pr-4">Groceries</td>
-              <td class="py-3 pr-4 font-medium">₨890</td>
-              <td class="py-3 pr-4">27</td>
+              <td class="py-3 pr-4 font-medium">₨890 / pack</td>
+              <td class="py-3 pr-4">27 packs</td>
               <td class="py-3 pr-4"><span class="badge badge-green"><span class="badge-dot"></span>In Stock</span></td>
               <td class="py-3"><button class="text-slate-400 hover:text-blue-600"><i class="fa-solid fa-pen"></i></button> <button class="text-slate-400 hover:text-red-600 ml-2"><i class="fa-solid fa-trash"></i></button></td>
             </tr>

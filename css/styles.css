@@ -16,6 +16,12 @@ body{background:#f4f6f9;}
   background:var(--sidebar);
   transition:transform .25s ease;
 }
+.store-logo{
+  width:36px;height:36px;border-radius:.65rem;
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;background:linear-gradient(135deg,#2563eb,#0d9488);
+  box-shadow:0 4px 10px rgba(37,99,235,.25);font-size:1rem;
+}
 .nav-link{
   display:flex;align-items:center;gap:.75rem;
   padding:.65rem .9rem;border-radius:.5rem;
@@ -97,6 +103,17 @@ tbody tr:hover{background:#f8fafc;}
   background:#fff;border-radius:1rem;max-width:520px;width:100%;
   max-height:90vh;overflow-y:auto;
 }
+.transaction-modal{max-width:720px;}
+.transaction-item-picker{display:grid;grid-template-columns:minmax(0,1fr) 92px auto;gap:.6rem;}
+.transaction-lines{background:#fff;}
+.transaction-line-header,.transaction-line{display:grid;grid-template-columns:minmax(0,1fr) 52px 110px 28px;gap:.75rem;align-items:center;padding:.7rem 1rem;font-size:.8rem;}
+.transaction-line-header{background:#f8fafc;color:#64748b;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em;}
+.transaction-line{border-top:1px solid #eef1f5;}
+.transaction-line button{color:#94a3b8;transition:color .15s ease;}
+.transaction-line button:hover{color:#dc2626;}
+.empty-transaction{padding:1.5rem 1rem;text-align:center;color:#94a3b8;font-size:.8rem;}
+.transaction-total{border-top:1px solid #eef1f5;padding-top:1rem;}
+@media (max-width:520px){.transaction-item-picker{grid-template-columns:minmax(0,1fr) 74px;}.transaction-item-picker button{grid-column:1 / -1;justify-content:center;}.transaction-line-header,.transaction-line{grid-template-columns:minmax(0,1fr) 42px 82px 24px;padding-left:.75rem;padding-right:.75rem;}}
 
 /* Dropdown */
 .dropdown-menu{

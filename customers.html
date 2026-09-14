@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customers — BusinessHub</title>
+<title>Customers — ZamZam Store</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -17,8 +17,8 @@
 <aside id="sidebar" class="sidebar w-64 flex-shrink-0 flex flex-col py-5 px-4">
   <div class="flex items-center justify-between mb-8 px-1">
     <div class="flex items-center gap-2">
-      <div class="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white font-bold">B</div>
-      <span class="text-white font-semibold text-lg">BusinessHub</span>
+      <div class="store-logo"><i class="fa-solid fa-wheat-awn"></i></div>
+      <span class="text-white font-semibold text-lg">ZamZam Store</span>
     </div>
     <button id="sidebarClose" class="lg:hidden text-slate-400"><i class="fa-solid fa-xmark"></i></button>
   </div>
@@ -26,6 +26,7 @@
     <a href="index.html" data-page="index.html" class="nav-link"><i class="fa-solid fa-gauge"></i>Dashboard</a>
     <a href="customers.html" data-page="customers.html" class="nav-link"><i class="fa-solid fa-users"></i>Customers</a>
     <a href="products.html" data-page="products.html" class="nav-link"><i class="fa-solid fa-box"></i>Products</a>
+    <a href="transactions.html" data-page="transactions.html" class="nav-link"><i class="fa-solid fa-receipt"></i>Transactions</a>
     <a href="#" class="nav-link"><i class="fa-solid fa-chart-line"></i>Reports</a>
     <a href="#" class="nav-link"><i class="fa-solid fa-gear"></i>Settings</a>
   </nav>
@@ -64,7 +65,7 @@
       <div class="relative">
         <button data-dropdown-toggle="profileMenu" class="flex items-center gap-2">
           <div class="w-9 h-9 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold text-sm">AK</div>
-          <span class="hidden sm:block text-sm font-medium text-slate-700">Ahmed Khan</span>
+          <span class="hidden sm:block text-sm font-medium text-slate-700">Arham Khan</span>
           <i class="fa-solid fa-chevron-down text-xs text-slate-400 hidden sm:block"></i>
         </button>
         <div id="profileMenu" class="dropdown-menu w-44 p-2">
